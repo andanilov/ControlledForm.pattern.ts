@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TextField from './app/components/ControlledForm/fields/Text';
+import ControlledForm from './app/components/ControlledForm';
+import Button from './app/components/ControlledForm/Button';
+import { HandleSubmit } from './app/components/ControlledForm/types';
 
 function App() {
+  const handleSubmit : HandleSubmit = (data) => console.log('!!!', data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="body">
+      <section className="form">
+        <ControlledForm handleSubmit={handleSubmit}>
+          <TextField
+            name="login"
+            label="Логин"
+            placeholder="Мой логин!"
+            value="999"
+            rules={{ isRequired: 'Нужен логин!' }}
+          />
+          <TextField
+            name="password"
+            label="Пароль"
+            type="password"
+            rules={{ isRequired: 'Нужен пароль!' }}
+          />
+          <span>Тестовый SPAN</span>
+          <Button type="submit">Отправить!</Button>
+          <Button>Обычная кнопка</Button>
+
+        </ControlledForm>
+      </section>
     </div>
   );
 }
