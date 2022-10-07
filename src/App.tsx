@@ -16,7 +16,7 @@ function App() {
             name="login"
             label="Логин"
             placeholder="Мой логин!"
-            value="999"
+            value="значение по умолчанию"
             rules={{ isRequired: 'Нужен логин!' }}
           />
           <TextField
@@ -31,6 +31,27 @@ function App() {
 
         </ControlledForm>
       </section>
+
+      <section className="form">
+        <ControlledForm handleSubmit={handleSubmit}>
+          <div>Вторая форма</div>
+          <TextField
+            name="login"
+            label="Логин"
+            placeholder="Мой логин!"
+            value=""
+            rules={{ isRequired: 'Нужен логин!' }}
+          />
+          <TextField
+            name="password"
+            label="Пароль"
+            type="password"
+            rules={{ isRequired: 'Нужен пароль!' }}
+          />
+          <Button type="submit">Отправить</Button>
+        </ControlledForm>
+      </section>
+
     </div>
   );
 }

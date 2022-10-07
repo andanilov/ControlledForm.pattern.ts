@@ -1,63 +1,59 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import useControlledForm from './useControlledForm';
 import {
-  IDataFields,
   IControlledForm,
   EventHandler,
-  IValidateRulesData,
+  IElementsMap,
 } from './types';
 
 export default function ControlledForm({ children, handleSubmit } : IControlledForm) {
-  const {
-    data,
-    error,
-    updateErrors,
-    onChange,
-    updateData,
-    dataRulesMap,
-    updateDataRulesMap,
-    validate,
-  } = useControlledForm();
-  const initData : IDataFields = {};
-  const validateRules : IValidateRulesData = {};
-
-  // - Checking children and modifying controlled fields by React.cloneElement()
-  children = useMemo(() => {
+  // 1. Getting needed controlled elements and initial data
+  const elementsMap: IElementsMap = useMemo(() => {
     // If children is alone convert it to array
     !Array.isArray(children) && (children = [children]);
 
-    return (children.map((child) => {
-      const { type, props } = child;
-      let addToProps = {};
-
-      // Controlled field
+    return children.reduce((map, { type, props }, index) => {
       if (typeof type === 'function' && !props?.noControlled && props?.name) {
-        // 1. Set initial value
-        !data[props.name] && updateData({ [props.name]: props?.value || '' });
-
-        // 2. Set validate rules
+        // Remember controlled field index from children
+        map.indexes.push(index);
+        // Set default value data
+        map.dataInit[props.name] = props.value ?? '';
+        // Set validator rules and error state for fields
         if (props?.rules) {
-          !dataRulesMap[props.name] && updateDataRulesMap({ [props.name]: props.rules });
-          !error[props.name] ?? updateErrors({ [props.name]: '' });
+          map.dataRulesMapInit[props.name] = props.rules;
+          map.errorInit[props.name] = '';
         }
-
-        addToProps = {
-          ...addToProps,
-          onChange,
-          value: data[props.name],
-          error: error[props.name],
-        };
       }
-
-      return Object.keys(addToProps).length
-        ? React.cloneElement(child, {
-          ...props,
-          ...addToProps,
-          key: props?.name || ~~(Math.random() * 10e5),
-        })
-        : child;
-    }));
+      return map;
+    }, {
+      indexes: [],
+      dataRulesMapInit: {},
+      dataInit: {},
+      errorInit: {},
+    } as IElementsMap);
   }, []);
+
+  // 2. Initializating controlled fields data
+  const {
+    data,
+    error,
+    onChange,
+    validate,
+  } = useControlledForm(elementsMap);
+
+  // 3. Updating condrolled fields if exist
+  elementsMap.indexes.length
+  && Array.isArray(children)
+  && (children = children.map((child, index) => {
+    elementsMap.indexes.includes(index) && (child = React.cloneElement(child, {
+      ...child.props,
+      value: data[child.props.name],
+      onChange,
+      error: error[child.props.name],
+      key: child.props?.name || ~~(Math.random() * 10e5),
+    }));
+    return child;
+  }));
 
   const onSubmit : EventHandler = (event) => {
     event.preventDefault();

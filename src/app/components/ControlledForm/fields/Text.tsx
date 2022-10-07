@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LabelWrapper from '../LabelWrapper';
 import { ITextField } from '../types';
 
@@ -9,14 +9,13 @@ const TextField = ({
   error,
   ...props
 } : ITextField) => (
-  <LabelWrapper label={label}>
+  <LabelWrapper label={label} error={error}>
     <input
       type={type || 'text'}
       name={name}
       autoComplete={type === 'password' ? 'on' : 'off'}
       {...props}
     />
-    {error && '!!!!!'}
   </LabelWrapper>
 );
 

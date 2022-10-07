@@ -27,6 +27,7 @@ export interface ITextField extends ICommonField {
 
 export interface ILabelWrapper {
   label?: string,
+  error?: FieldError,
   children: ReactNode | ReactNode[],
 }
 
@@ -51,12 +52,15 @@ export interface IValidateRulesData {
 
 export interface IUseControlledForm {
   data: IDataFields,
-  updateData(newData: IDataFields): void,
   error: IDataFields,
-  updateErrors(errors: IDataFields): void,
   onChange(event: React.ChangeEvent): void,
-  // setDataRulesMap(dataRulesMap: IValidateRulesData): void,
   dataRulesMap: IValidateRulesData,
-  updateDataRulesMap(newDataRules: IValidateRulesData): void,
   validate() : number
+}
+
+export interface IElementsMap {
+  indexes: number[],
+  dataRulesMapInit: IValidateRulesData,
+  dataInit: IDataFields,
+  errorInit: IDataFields
 }
