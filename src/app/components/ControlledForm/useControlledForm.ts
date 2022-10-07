@@ -24,8 +24,8 @@ export default function useControlledForm({
     // - 1. Check every field if errors exist
     const currentError = Object.entries(dataRulesMap).reduce((errrsAcc, [name, rls]) => {
       // Get errors for field
-      const errs = Object.entries(rls).reduce((rlsField: string[], [rl, msg]) => {
-        const err = validator(rules[rl as keyof IRules](msg) as Fnctn)(data[name]);
+      const errs = Object.entries(rls).reduce((rlsField: string[], [rl, argv]) => {
+        const err = validator(rules[rl as keyof IRules](argv) as Fnctn)(data[name]);
         return err ? [...rlsField, err] : rlsField;
       }, []);
 

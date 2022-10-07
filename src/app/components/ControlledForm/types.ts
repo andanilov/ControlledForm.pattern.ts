@@ -1,11 +1,11 @@
 import { ReactNode, ReactElement } from "react";
-import { IRules } from "./validator";
+import { IRules, IRuleArguments } from "./validator";
 
 // -- Types
 export type EventType = React.FormEvent<HTMLInputElement | HTMLFormElement | HTMLSelectElement>;
 export type EventHandler = (event: EventType) => void;
 export type HandleSubmit = (data: IDataFields, event?: EventType) => any;
-export type ValidationRules = {[key in keyof IRules]?: string};
+export type ValidationRules = {[key in keyof IRules]?: IRuleArguments};
 export type FieldError = string | string[];
 export type Option = { title: string, value: string };
 

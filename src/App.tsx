@@ -18,13 +18,16 @@ function App() {
             label="Логин"
             placeholder="Мой логин!"
             value="значение по умолчанию"
-            rules={{ isRequired: 'Нужен логин!' }}
+            rules={{
+              isRequired: { msg: 'Нужен логин!' },
+              min: { len: 5, msg: 'Слишком короткий логин!' },
+            }}
           />
           <TextField
             name="password"
             label="Пароль"
             type="password"
-            rules={{ isRequired: 'Нужен пароль!' }}
+            rules={{ isRequired: { msg: 'Нужен пароль!' } }}
           />
           <span>Тестовый SPAN</span>
           <Button type="submit">Отправить!</Button>
@@ -40,7 +43,7 @@ function App() {
             name="login"
             label="Логин"
             placeholder="Мой логин!"
-            rules={{ isRequired: 'Нужен логин!' }}
+            rules={{ isRequired: { msg: 'Нужен логин!' } }}
           />
           <SelectField
             name="list"
@@ -53,7 +56,7 @@ function App() {
               { title: 'Опция 3', value: 'val3' },
               { title: 'Опция 4', value: 'val4' },
             ]}
-            rules={{ isRequired: 'Нужно выбрать!' }}
+            rules={{ isRequired: { msg: 'Нужно выбрать!' } }}
           />
           <Button type="submit">Отправить</Button>
         </ControlledForm>
