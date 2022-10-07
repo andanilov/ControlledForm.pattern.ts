@@ -34,4 +34,13 @@ section.form form input, section.form form select {
     padding: .2em;
     font-size: 1em;
     margin: .3em 0;
+    border: grey 1px solid;
+}
+
+section.form form .error input, section.form form .error input {
+    border-color:red;
+}
+
+section.form form .error div {
+    color:firebrick;
 }

@@ -33,7 +33,6 @@ export default function useControlledForm({
     }, {});
     // - 2. Update errors state
     setError(() => currentError);
-    console.log(currentError);
 
     return Object.keys(currentError).length;
   };
