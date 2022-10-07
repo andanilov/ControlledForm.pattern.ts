@@ -19,6 +19,10 @@ section.form {
     width: min-content;
 }
 
+section.form label {
+    display: grid;
+}
+
 section.form form {
     display: grid;
     width: 50%;
@@ -26,7 +30,7 @@ section.form form {
     gap: .5em;
 }
 
-section.form form input {
+section.form form input, section.form form select {
     padding: .2em;
     font-size: 1em;
     margin: .3em 0;

@@ -50,6 +50,7 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
       value: data[child.props.name],
       onChange,
       error: error[child.props.name],
+      rules: '',
       key: child.props?.name || ~~(Math.random() * 10e5),
     }));
     return child;

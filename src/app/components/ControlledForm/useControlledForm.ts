@@ -16,8 +16,9 @@ export default function useControlledForm({
   const [dataRulesMap] = useState<IValidateRulesData>(dataRulesMapInit);
   const [error, setError] = useState<IDataFields>(errorInit);
 
-  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setData((prevData) => ({ ...prevData, [target.name]: target.value }));
+  };
 
   const validate = (): number => {
     // - 1. Check every field if errors exist
@@ -32,6 +33,7 @@ export default function useControlledForm({
     }, {});
     // - 2. Update errors state
     setError(() => currentError);
+    console.log(currentError);
 
     return Object.keys(currentError).length;
   };
