@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import ControlledForm from './app/components/ControlledForm';
-import TextField from './app/components/ControlledForm/fields/Text';
-import SelectField from './app/components/ControlledForm/fields/Select';
-import Button from './app/components/ControlledForm/Button';
-import { HandleSubmit } from './app/components/ControlledForm/types';
+import ControlledForm, {
+  TextField,
+  SelectField,
+  Button,
+  HandleSubmit,
+} from './app/components/ControlledForm';
 
 function App() {
   const handleSubmit: HandleSubmit = (data) => console.log('!!!', data);

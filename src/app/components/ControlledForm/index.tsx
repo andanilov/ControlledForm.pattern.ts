@@ -6,6 +6,12 @@ import {
   IElementsMap,
 } from './types';
 
+// -- ReExport form elements and types
+export { default as TextField } from './fields/TextField';
+export { default as SelectField } from './fields/SelectField';
+export { default as Button } from './Button';
+export type { HandleSubmit } from './types';
+
 export default function ControlledForm({ children, handleSubmit } : IControlledForm) {
   // 1. Getting needed controlled elements and initial data
   const elementsMap: IElementsMap = useMemo(() => {

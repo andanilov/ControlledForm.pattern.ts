@@ -6,34 +6,54 @@ Form management and validation component
 
 ```
 import React from 'react';
-import ControlledForm from './app/components/ControlledForm';
-import TextField from './app/components/ControlledForm/fields/Text';
-import SelectField from './app/components/ControlledForm/fields/Select';
-import Button from './app/components/ControlledForm/Button';
-import { HandleSubmit } from './app/components/ControlledForm/types';
+import './App.css';
+import ControlledForm, {
+  TextField,
+  SelectField,
+  Button,
+  HandleSubmit,
+} from './app/components/ControlledForm';
 
 function App() {
-  const handleSubmit: HandleSubmit = (data) => console.log('Result', data);
+  const handleSubmit: HandleSubmit = (data) => console.log('!!!', data);
 
   return (
-    <ControlledForm handleSubmit={handleSubmit}>
-        <TextField
+    <div className="body">
+      <section className="form">
+        <ControlledForm handleSubmit={handleSubmit}>
+          <TextField
             name="login"
             label="Логин"
             placeholder="Мой логин!"
             value="значение по умолчанию"
             rules={{
-                isRequired: { msg: 'Нужен логин!' },
-                min: { len: 5, msg: 'Слишком короткий логин!' },
+              isRequired: { msg: 'Нужен логин!' },
+              min: { len: 5, msg: 'Слишком короткий логин!' },
             }}
-        />
-        <TextField
+          />
+          <TextField
             name="password"
             label="Пароль"
             type="password"
             rules={{ isRequired: { msg: 'Нужен пароль!' } }}
-        />
-        <SelectField
+          />
+          <span>Тестовый SPAN</span>
+          <Button type="submit">Отправить!</Button>
+          <Button>Обычная кнопка</Button>
+
+        </ControlledForm>
+      </section>
+
+      <section className="form">
+        <ControlledForm handleSubmit={handleSubmit}>
+          <div>Вторая форма</div>
+          <TextField
+            name="login"
+            label="Логин"
+            placeholder="Мой логин!"
+            rules={{ isRequired: { msg: 'Нужен логин!' } }}
+          />
+          <SelectField
             name="list"
             label="Список"
             placeholder="--- выбор ---"
@@ -45,10 +65,13 @@ function App() {
               { title: 'Опция 4', value: 'val4' },
             ]}
             rules={{ isRequired: { msg: 'Нужно выбрать!' } }}
-        />
-        <Button type="submit">Отправить</Button>
-        <Button>Обычная кнопка</Button>
-    </ControlledForm>);
+          />
+          <Button type="submit">Отправить</Button>
+        </ControlledForm>
+      </section>
+
+    </div>
+  );
 }
 
 export default App;
