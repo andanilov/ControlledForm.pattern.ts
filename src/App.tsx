@@ -30,6 +30,12 @@ function App() {
             type="password"
             rules={{ isRequired: { msg: 'Нужен пароль!' } }}
           />
+          <TextField
+            name="password2"
+            label="Повтор пароля"
+            type="password"
+            rules={{ isSimilar: { original: 'password', msg: 'Пароли не совпадают!' } }}
+          />
           <span>Тестовый SPAN</span>
           <Button type="submit">Отправить!</Button>
           <Button>Обычная кнопка</Button>
