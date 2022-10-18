@@ -46,5 +46,6 @@ export default function useControlledForm({
     error,
     onChange,
     validate,
+    setError,
   } as IUseControlledForm;
 }

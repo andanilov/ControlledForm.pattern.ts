@@ -4,7 +4,7 @@ import { IRules, IRuleArguments } from "./validator";
 // -- Types
 export type EventType = React.FormEvent<HTMLInputElement | HTMLFormElement | HTMLSelectElement>;
 export type EventHandler = (event: EventType) => void;
-export type HandleSubmit = (data: IDataFields, event?: EventType) => any;
+export type HandleSubmit = (data: IDataFields, setError: Function, event?: EventType) => any;
 export type ValidationRules = {[key in keyof IRules]?: IRuleArguments};
 export type FieldError = string | string[];
 export type Option = { title: string, value: string };
@@ -59,6 +59,7 @@ export interface IValidateRulesData {
 export interface IUseControlledForm {
   data: IDataFields,
   error: IDataFields,
+  setError(errors: IDataFields): void,
   onChange(event: React.ChangeEvent): void,
   dataRulesMap: IValidateRulesData,
   validate() : number

@@ -45,6 +45,7 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
     error,
     onChange,
     validate,
+    setError,
   } = useControlledForm(elementsMap);
 
   // 3. Updating condrolled fields if exist
@@ -66,7 +67,7 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
     event.preventDefault();
     handleSubmit
     && !validate()
-    && handleSubmit(data, event);
+    && handleSubmit(data, setError, event);
   };
 
   return <form onSubmit={onSubmit}>{children}</form>;

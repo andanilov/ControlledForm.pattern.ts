@@ -8,12 +8,15 @@ import ControlledForm, {
 } from './app/components/ControlledForm';
 
 function App() {
-  const handleSubmit: HandleSubmit = (data) => console.log('!!!', data);
+  const handleSubmit1: HandleSubmit = (data) => console.log('!!!', data);
+  const handleSubmit2: HandleSubmit = (data, setError) => {
+    setError((prevErrors: Record<string, unknown>) => ({ ...prevErrors, login: 'error after submit' }));
+  };
 
   return (
     <div className="body">
       <section className="form">
-        <ControlledForm handleSubmit={handleSubmit}>
+        <ControlledForm handleSubmit={handleSubmit1}>
           <TextField
             name="login"
             label="Логин"
@@ -44,7 +47,7 @@ function App() {
       </section>
 
       <section className="form">
-        <ControlledForm handleSubmit={handleSubmit}>
+        <ControlledForm handleSubmit={handleSubmit2}>
           <div>Вторая форма</div>
           <TextField
             name="login"
