@@ -40,6 +40,7 @@ export interface ILabelWrapper {
 export interface IButton {
   children: ReactNode | ReactNode[],
   type?: 'submit' | 'reset' | 'button',
+  loading?: boolean,
 }
 
 // -- Form interfaces
@@ -62,12 +63,15 @@ export interface IUseControlledForm {
   setError(errors: IDataFields): void,
   onChange(event: React.ChangeEvent): void,
   dataRulesMap: IValidateRulesData,
-  validate() : number
+  validate() : number,
+  loading: boolean,
+  setLoading(isLoading: boolean): void,
 }
 
 export interface IElementsMap {
   indexes: number[],
   dataRulesMapInit: IValidateRulesData,
   dataInit: IDataFields,
-  errorInit: IDataFields
+  errorInit: IDataFields,
+  submitButton?: React.RefObject<HTMLInputElement> | null,
 }

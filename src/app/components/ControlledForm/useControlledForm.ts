@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { MutableRefObject, useRef, useState } from 'react';
 import {
   IDataFields,
   IElementsMap,
@@ -15,6 +15,7 @@ export default function useControlledForm({
   const [data, setData] = useState<IDataFields>(dataInit);
   const [dataRulesMap] = useState<IValidateRulesData>(dataRulesMapInit);
   const [error, setError] = useState<IDataFields>(errorInit);
+  const [loading, setLoading] = useState(false);
 
   const onChange = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setData((prevData) => ({ ...prevData, [target.name]: target.value }));
@@ -47,5 +48,8 @@ export default function useControlledForm({
     onChange,
     validate,
     setError,
+    dataRulesMap,
+    loading,
+    setLoading,
   } as IUseControlledForm;
 }

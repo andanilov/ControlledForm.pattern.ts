@@ -39,5 +39,6 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 0,
 		'no-console': 0,
 		'react/button-has-type': 0,
+		'no-return-await': 0,
 	},
 };

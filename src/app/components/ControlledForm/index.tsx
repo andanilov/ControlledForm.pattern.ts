@@ -36,6 +36,7 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
       dataRulesMapInit: {},
       dataInit: {},
       errorInit: {},
+      submitButton: null,
     } as IElementsMap);
   }, []);
 
@@ -46,12 +47,15 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
     onChange,
     validate,
     setError,
+    loading,
+    setLoading,
   } = useControlledForm(elementsMap);
 
   // 3. Updating condrolled fields if exist
   elementsMap.indexes.length
   && Array.isArray(children)
   && (children = children.map((child, index) => {
+    // Update fields
     elementsMap.indexes.includes(index) && (child = React.cloneElement(child, {
       ...child.props,
       value: data[child.props.name],
@@ -60,14 +64,24 @@ export default function ControlledForm({ children, handleSubmit } : IControlledF
       rules: '',
       key: child.props?.name || ~~(Math.random() * 10e5),
     }));
+
+    // Update submit button
+    child?.props?.type === 'submit' && (child = React.cloneElement(child, {
+      ...child.props,
+      loading,
+      key: ~~(Math.random() * 10e5),
+    }));
+
     return child;
   }));
 
-  const onSubmit : EventHandler = (event) => {
+  const onSubmit : EventHandler = async (event) => {
     event.preventDefault();
-    handleSubmit
-    && !validate()
-    && handleSubmit(data, setError, event);
+    if (handleSubmit && !validate()) {
+      setLoading(true);
+      await handleSubmit(data, setError, event);
+      setLoading(false);
+    }
   };
 
   return <form onSubmit={onSubmit}>{children}</form>;

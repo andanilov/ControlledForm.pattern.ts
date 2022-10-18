@@ -8,7 +8,12 @@ import ControlledForm, {
 } from './app/components/ControlledForm';
 
 function App() {
-  const handleSubmit1: HandleSubmit = (data) => console.log('!!!', data);
+  const handleSubmit1: HandleSubmit = async (data) => await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 2000);
+  });
+
   const handleSubmit2: HandleSubmit = (data, setError) => {
     setError((prevErrors: Record<string, unknown>) => ({ ...prevErrors, login: 'error after submit' }));
   };
