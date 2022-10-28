@@ -7,6 +7,7 @@ const TextField = ({
   label,
   type,
   error,
+  className,
   ...props
 } : ITextField) => (
   <LabelWrapper label={label} error={error}>
@@ -14,6 +15,7 @@ const TextField = ({
       type={type || 'text'}
       name={name}
       autoComplete={type === 'password' ? 'on' : 'off'}
+      className={className || ''}
       {...props}
     />
   </LabelWrapper>

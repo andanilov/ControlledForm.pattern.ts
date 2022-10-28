@@ -8,10 +8,15 @@ const SelectField = ({
   error,
   options,
   placeholder,
+  className,
   ...props
 } : ISelectField) => (
   <LabelWrapper label={label} error={error}>
-    <select name={name} {...props}>
+    <select
+      name={name}
+      className={className || ''}
+      {...props}
+    >
       <option value="">{placeholder}</option>
       {options.map(({ title, value }) => (
         <option value={value} key={value}>

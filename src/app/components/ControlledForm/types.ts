@@ -18,12 +18,13 @@ export interface ICommonField {
   noControlled?: boolean,
   defaultValue?: string,
   rules?: ValidationRules,
-  error?: FieldError
+  error?: FieldError,
+  className?: string
 }
 
 export interface ITextField extends ICommonField {
   placeholder?: string,
-  type?: 'text' | 'password', 
+  type?: 'text' | 'password',
 }
 
 export interface ISelectField extends ICommonField {
@@ -41,6 +42,7 @@ export interface IButton {
   children: ReactNode | ReactNode[],
   type?: 'submit' | 'reset' | 'button',
   loading?: boolean,
+  className?: string,
 }
 
 // -- Form interfaces
