@@ -27,8 +27,8 @@ export default function useControlledForm({
       // Get errors for field
       const errs = Object.entries(rls).reduce((rlsField: string[], [rl, argv]) => {
         // If needs another field to compare
-        argv?.original && data[argv.original]
-        && (argv = { ...argv, original: data[argv?.original] as string });
+        argv?.original !== undefined
+        && (argv = { ...argv, original: String(data[argv?.original]) });
 
         const err = validator(rules[rl as keyof IRules](argv) as Fnctn)(data[name]);
         return err ? [...rlsField, err] : rlsField;
